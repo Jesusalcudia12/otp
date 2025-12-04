@@ -28,13 +28,13 @@ logging.basicConfig(
     REG_ALERGIAS,
     REG_SEXO,
     REG_EMBARAZO,
-    REG_VALIDACION
-    CONSULTA_PREGUNTA
-    CMD_IMC_PESO
-    CMD_IMC_ALTURA
-    CMD_FUR_REGULARIDAD
-    CMD_FUR_FECHA
-    CMD_FITNEST_DISCIPLINA
+    REG_VALIDACION,
+    CONSULTA_PREGUNTA,
+    CMD_IMC_PESO,
+    CMD_IMC_ALTURA,
+    CMD_FUR_REGULARIDAD,
+    CMD_FUR_FECHA,
+    CMD_FITNEST_DISCIPLINA,
 ) = range(9, 10, 11, 12, 13, 14)
 
 
@@ -658,7 +658,7 @@ async def comando_salud(update: Update, context: CallbackContext):
 def main():
     """Ejecuta el bot."""
     # ⚠️ REEMPLAZA ESTO CON TU TOKEN DE BOTFATHER ⚠️
-    TOKEN = "8330745974:AAE7hdMyFr_QR0_RP9FL4ngTIrrObMMFkCs" 
+    TOKEN = "8555237773:AAHZiG_nqBzGyWshGsXBzCEKnOKmOjxoHLw" 
     
     application = Application.builder().token(TOKEN).build()
 
