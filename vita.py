@@ -667,6 +667,7 @@ def main():
         entry_points=[CommandHandler("start", start,)],
         entry_points=[CommandHandler("consulta", comando_consulta)],
         entry_points=[CommandHandler("ayuda", comando_ayuda)],
+        entry_ponits=[CommandHandler("perfil", comando_perfil)],
         entry_points=[CommandHandler("imc", comando_imc)],
         entry_points=[CommandHandler("fur", comando_fur)],
         entry_points=[CommandHandler("care", comando_care)],
