@@ -634,20 +634,19 @@ async def comando_perfil(update: Update, context: CallbackContext):
 async def comando_salud(update: Update, context: CallbackContext):
     """Muestra el mensaje de venta y enlaces de ayuda."""
     
-    # ⚠️ REEMPLAZA ESTOS CON TUS ENLACES REALES
-    enlaces_proveedor = (
-        "📚 **Guía Esencial de Longevidad** [LINK]\n"
-        "🎬 **Video - 5 Secretos para la Vitalidad** [LINK]\n"
-        "🔗 **Lista de Herramientas Nutricionales** [LINK]"
-    )
-    
     mensaje = (
         "✨ **¡Tu salud es lo primero!** ✨\n\n"
         "¿Quieres seguir viviendo por mucho tiempo? ¡Llegaste al lugar indicado!\n\n"
         "Como tu asistente médico, me encargué de buscar las mejores herramientas y a un precio accesible. "
-        "¡No vale la pena invertir en tu salud! 😉\n\n"
+        "¡vale la pena invertir en tu salud! 😉\n\n"
         "**Te comparto esta lista de libros, guías y videos de ayuda:**\n"
         f"{enlaces_proveedor}"
+         # ⚠️ REEMPLAZA ESTOS CON TUS ENLACES REALES
+    enlaces_proveedor = (
+        "📚 **salud keto** [https://go.hotmart.com/D103265767X]\n"
+        "🎬 **salud medica** [https://go.hotmart.com/J103265834K]\n"
+        "🔗 **salud y fitnest** [https://go.hotmart.com/Q103265863P]"
+        "📚 **limpieza profunda care** [https://go.hotmart.com/E103265917F]\n"
     )
     
     await update.message.reply_text(mensaje, parse_mode='Markdown')
