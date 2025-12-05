@@ -666,17 +666,18 @@ def main():
 
     # Definición del flujo del ConversationHandler
     registro_handler = ConversationHandler(
-        entry_points=[CommandHandler("start", start,)],
-        entry_points=[CommandHandler("consulta", comando_consulta)],
-        entry_points=[CommandHandler("ayuda", comando_ayuda)],
-        entry_ponits=[CommandHandler("perfil", comando_perfil)],
-        entry_points=[CommandHandler("imc", comando_imc)],
-        entry_points=[CommandHandler("fur", comando_fur)],
-        entry_points=[CommandHandler("care", comando_care)],
-        entry_points=[CommandHandler("salud", comando_salud)],
-        entry_points=[CommandHandler("fitnest", comando_fitnest)],
-        entry_points=[CommandHandler("maps", comando_maps)],
-    )
+        entry_points=[
+        CommandHandler("start", start,),
+        CommandHandler("consulta", comando_consulta),
+        CommandHandler("ayuda", comando_ayuda),
+        CommandHandler("perfil", comando_perfil),
+        CommandHandler("imc", comando_imc),
+        CommandHandler("fur", comando_fur),
+        CommandHandler("care", comando_care),
+        CommandHandler("salud", comando_salud),
+        CommandHandler("fitnest", comando_fitnest),
+        CommandHandler("maps", comando_maps),
+    ),
     states={
         REG_NOMBRE: [MessageHandler(filters.TEXT & ~filters.COMMAND, obtener_nombre)],
         REG_APELLIDOS: [MessageHandler(filters.TEXT & ~filters.COMMAND, obtener_apellidos)],
@@ -693,7 +694,7 @@ def main():
         CMD_FUR_REGULARIDAD: [MessageHandler(filters.TEXT & ~filters.COMMAND, fur_obtener_regularidad)],
         CMD_FUR_FECHA: [MessageHandler(filters.TEXT & ~filters.COMMAND, fur_calcular)],
         CMD_FITNEST_DISCIPLINA: [MessageHandler(filters.TEXT & ~filters.COMMAND, fitnest_buscar)],
-    }
+    },
         
     fallbacks=[CommandHandler("cancel", cancel)],
     allow_reentry=True,
