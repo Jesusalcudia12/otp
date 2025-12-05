@@ -36,7 +36,7 @@ logging.basicConfig(
     CMD_FUR_REGULARIDAD,
     CMD_FUR_FECHA,
     CMD_FITNEST_DISCIPLINA,
-) = range(9, 10, 11, 12, 13, 14)
+) = range(9, 14)
 
 
 # ----------------------------------------------------
