@@ -566,7 +566,7 @@ async def fitnest_buscar(update: Update, context: CallbackContext) -> int:
     await update.message.reply_text(f"🔎 Buscando las mejores dietas y rutinas para **{disciplina}**...")
     
     try:
-        resultado = await google:search(query)
+        resultado = await google_search(query)
         await update.message.reply_text(
             f"💪 **Resultados para {disciplina}:**\n\n"
             f"{resultado[:500]}..."
@@ -596,8 +596,8 @@ async def procesar_ubicacion(update: Update, context: CallbackContext):
         # Aquí se usa una búsqueda con Google Maps API o Google Search
         # Ejemplo:
         try:
-            hospitales = await google:search(f"hospitales cercanos a {lat}, {lon}")
-            farmacias = await google:search(f"farmacias cercanas a {lat}, {lon}")
+            hospitales = await google_search(f"hospitales cercanos a {lat}, {lon}")
+            farmacias = await google_search(f"farmacias cercanas a {lat}, {lon}")
             
             await update.message.reply_text(
                 "🗺️ **Resultados Cercanos:**\n\n"
