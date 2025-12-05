@@ -678,6 +678,7 @@ def main():
         CommandHandler("fitnest", comando_fitnest),
         CommandHandler("maps", comando_maps),
         ],
+    )
     states={
         REG_NOMBRE: [MessageHandler(filters.TEXT & ~filters.COMMAND, obtener_nombre)],
         REG_APELLIDOS: [MessageHandler(filters.TEXT & ~filters.COMMAND, obtener_apellidos)],
