@@ -665,7 +665,7 @@ def main():
     application = Application.builder().token(TOKEN).build()
 
     # Definición del flujo del ConversationHandler
-    registro_handler = ConversationHandler(
+    registro_handler = "states", "fallbacks"(
         entry_points=[CommandHandler("start", start,),
         CommandHandler("consulta", comando_consulta),
         CommandHandler("ayuda", comando_ayuda),
