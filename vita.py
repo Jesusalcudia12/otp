@@ -543,7 +543,7 @@ async def comando_care(update: Update, context: CallbackContext):
     await update.message.reply_text("🔎 Buscando en la web la mejor información para una piel limpia y definida...")
     
     try:
-        resultado = await google:search(query)
+        resultado = await google_search(query)
         # Muestra un resumen de la búsqueda
         await update.message.reply_text(
             f"✨ **Resultados de Cuidado Facial:**\n\n"
