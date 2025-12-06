@@ -660,13 +660,15 @@ async def comando_salud(update: Update, context: CallbackContext):
 def main():
     """Ejecuta el bot."""
     # ⚠️ REEMPLAZA ESTO CON TU TOKEN DE BOTFATHER ⚠️
-    TOKEN = "8555237773:AAHZiG_nqBzGyWshGsXBzCEKnOKmOjxoHLw" 
+    TOKEN = ("8555237773:AAHZiG_nqBzGyWshGsXBzCEKnOKmOjxoHLw") 
     
     application = Application.builder().token(TOKEN).build()
 
     # Definición del flujo del ConversationHandler
-    registro_handler = "states", "fallbacks"(
-        entry_points=[CommandHandler("start", start,),
+    registro_handler = ConversationHandler(
+        
+        entry_points=[
+        CommandHandler("start", start,),
         CommandHandler("consulta", comando_consulta),
         CommandHandler("ayuda", comando_ayuda),
         CommandHandler("perfil", comando_perfil),
@@ -677,7 +679,6 @@ def main():
         CommandHandler("fitnest", comando_fitnest),
         CommandHandler("maps", comando_maps),
         ],
-    )
     states={
         REG_NOMBRE: [MessageHandler(filters.TEXT & ~filters.COMMAND, obtener_nombre)],
         REG_APELLIDOS: [MessageHandler(filters.TEXT & ~filters.COMMAND, obtener_apellidos)],
@@ -694,12 +695,18 @@ def main():
         CMD_FUR_REGULARIDAD: [MessageHandler(filters.TEXT & ~filters.COMMAND, fur_obtener_regularidad)],
         CMD_FUR_FECHA: [MessageHandler(filters.TEXT & ~filters.COMMAND, fur_calcular)],
         CMD_FITNEST_DISCIPLINA: [MessageHandler(filters.TEXT & ~filters.COMMAND, fitnest_buscar)],
-    },
+        },
         
     fallbacks=[CommandHandler("cancel", cancel)],
     allow_reentry=True,
+        ]
+    )
     
-
+    # ----------------------------------------------------
+    # AÑADE AQUÍ LOS MANEJADORES DE COMANDOS /consulta, /ayuda, etc.
+    # ----------------------------------------------------
+    # application.add_handler(CommandHandler("consulta", comando_consulta)) # Ejemplo
+    
     application.add_handler(registro_handler)
     application.add_handler(consulta_handler)
     application.add_handler(ayuda_handler)
@@ -711,10 +718,6 @@ def main():
     application.add_handler(perfil_handler)
     application.add_handler(maps_handler)
     application.add_handler(MessageHandler(filters.LOCATION, procesar_ubicacion))
-    # ----------------------------------------------------
-    # AÑADE AQUÍ LOS MANEJADORES DE COMANDOS /consulta, /ayuda, etc.
-    # ----------------------------------------------------
-    # application.add_handler(CommandHandler("consulta", comando_consulta)) # Ejemplo
     
     # Iniciar el Bot
     application.run_polling(allowed_updates=Update.ALL_TYPES)
