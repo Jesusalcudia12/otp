@@ -49,7 +49,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         "necesito recopilar algunos datos de tu perfil.\n"
         "**Comencemos con tu Nombre Completo:**"
     )
-    return REG_NOMBRES
+    return REG_NOMBRE
     """Inicia la conversación y pide el nombre."""
     user_data = context.user_data
     chat_id = update.effective_chat.id
