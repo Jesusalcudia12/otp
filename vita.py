@@ -44,7 +44,7 @@ logging.basicConfig(
 # ----------------------------------------------------
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-   
+    
     user_data = context.user_data
     
     # 1. Lógica de Verificación (IF)
@@ -70,14 +70,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         )
         
         # Retorna el primer estado de la conversación (REG_NOMBRE)
-        return REG_NOMBRE(update, Update, context, ContextTypes.DEFAULT_TYPE) -> int:
-    nombre_ingresado = update.message.text
-    
-    await update.message.reply_text(
-        f"¡Hola, {nombre_ingresado}! Gracias por tu nombre.\n"
-        "Ahora, **¿cuáles son tus Apellidos?**"
-    )
-    return REG_APELLIDOS
+        return REG_NOMBRE
 async def comando_consulta(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Inicia el flujo de consulta de síntomas."""
     user_data = context.user_data
@@ -98,7 +91,7 @@ async def comando_consulta(update: Update, context: ContextTypes.DEFAULT_TYPE) -
 # ----------------------------------------------------
 
 # --- A. Captura Nombre ---
-async def REG_NOMBRE(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+async def obtener_nombre(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     nombre_ingresado = update.message.text
     
     await update.message.reply_text(
@@ -724,7 +717,7 @@ def main():
     registro_handler = ConversationHandler(
         
         entry_points=[
-        CommandHandler("start", REG_NOMBRE),
+        CommandHandler("start", comando_start),
         CommandHandler("consulta", comando_consulta),
         CommandHandler("ayuda", comando_ayuda),
         CommandHandler("perfil", comando_perfil),
@@ -736,7 +729,7 @@ def main():
         CommandHandler("maps", comando_maps),
         ],
     states={
-        REG_NOMBRE: [MessageHandler(filters.TEXT & ~filters.COMMAND, REG_NOMBRE)],
+        REG_NOMBRE: [MessageHandler(filters.TEXT & ~filters.COMMAND, obtener_nombre)],
         REG_APELLIDOS: [MessageHandler(filters.TEXT & ~filters.COMMAND, obtener_apellidos)],
         REG_EDAD: [MessageHandler(filters.TEXT & ~filters.COMMAND, obtener_edad)],
         REG_PESO: [MessageHandler(filters.TEXT & ~filters.COMMAND, obtener_peso)],
@@ -764,7 +757,7 @@ def main():
     # ----------------------------------------------------
     # application.add_handler(CommandHandler("consulta", comando_consulta)) # Ejemplo
     
-    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("start", comando_start))
     application.add_handler(CommandHandler("consulta", comando_consulta))
     application.add_handler(CommandHandler("ayuda", comando_ayuda))
     application.add_handler(CommandHandler("imc", comando_imc))
