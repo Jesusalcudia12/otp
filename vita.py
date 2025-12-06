@@ -473,7 +473,7 @@ async def calcular_e_informar_imc(update: Update, context: ContextTypes.DEFAULT_
         
     # Finaliza la conversación
     return ConversationHandler.END
-async def comando_fur(update: Update, context: CallbackContext) -> int:
+async def comando_fur(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Inicia el cálculo de la edad gestacional."""
     user_data = context.user_data
     
