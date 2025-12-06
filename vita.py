@@ -45,7 +45,7 @@ logging.basicConfig(
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text(
-        "¡Hola! Soy tu Asistente de Salud. Para comenzar a darte asistencia personalizada, "
+        "¡Hola! Soy tu Asistente de Salud. Para comenzar a darte asistencia personalizada"
         "necesito recopilar algunos datos de tu perfil.\n"
         "**Comencemos con tu Nombre Completo:**"
           update.message.text
