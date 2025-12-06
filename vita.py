@@ -668,7 +668,7 @@ def main():
     registro_handler = ConversationHandler(
         
         entry_points=[
-        CommandHandler("start", start,),
+        CommandHandler("start", comando_start),
         CommandHandler("consulta", comando_consulta),
         CommandHandler("ayuda", comando_ayuda),
         CommandHandler("perfil", comando_perfil),
@@ -708,16 +708,16 @@ def main():
     # ----------------------------------------------------
     # application.add_handler(CommandHandler("consulta", comando_consulta)) # Ejemplo
     
-    application.add_handler(registro_handler)
-    application.add_handler(consulta_handler)
-    application.add_handler(ayuda_handler)
-    application.add_handler(imc_handler)
-    application.add_handler(fur_handler)
-    application.add_handler(care_handler)
-    application.add_handler(salud_handler)
-    application.add_handler(fitnest_handler)
-    application.add_handler(perfil_handler)
-    application.add_handler(maps_handler)
+    application.add_handler(CommandHandler("start", comando_start))
+    application.add_handler(CommandHandler("consulta", comando_consulta))
+    application.add_handler(CommandHandler("ayuda", comando_ayuda))
+    application.add_handler(CommandHandler("imc", comando_imc))
+    application.add_handler(CommandHandler("fur", comando_fur))
+    application.add_handler(CommandHandler("care", comando_care))
+    application.add_handler(CommandHandler("salud", comando_salud))
+    application.add_handler(CommandHandler("fitnest", comando_fitnest))
+    application.add_handler(CommandHandler("perfil", comando_perfil))
+    application.add_handler(CommandHandler("maps", comando_maps))
     application.add_handler(MessageHandler(filters.LOCATION, procesar_ubicacion))
     
     # Iniciar el Bot
