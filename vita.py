@@ -63,7 +63,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         "necesito recopilar algunos datos de tu perfil.\n"
         "**Comencemos con tu Nombre Completo:**"
     )
-    return REG_NOMBRE
+    return REG_APELLIDOS
 async def comando_consulta(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Inicia el flujo de consulta de síntomas."""
     user_data = context.user_data
