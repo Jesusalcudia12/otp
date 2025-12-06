@@ -48,6 +48,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         "¡Hola! Soy tu Asistente de Salud. Para comenzar a darte asistencia personalizada, "
         "necesito recopilar algunos datos de tu perfil.\n"
         "**Comencemos con tu Nombre Completo:**"
+          update.message.text
+     nombre_ingresado = update.message.text
+    context.user_data['nombre'] = nombre_ingresado
     )
     return REG_NOMBRE
     user_data = context.user_data
