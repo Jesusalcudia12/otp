@@ -6,7 +6,7 @@ from telegram.ext import (
     MessageHandler,
     filters,
     ConversationHandler,
-    CallbackContext,
+    ContextTypes,
 )
 from googlesearch import search
 
@@ -84,21 +84,27 @@ async def comando_consulta(update: Update, context: CallbackContext) -> int:
 # ----------------------------------------------------
 
 # --- A. Captura Nombre ---
-async def obtener_nombre(update: Update, context: CallbackContext) -> int:
-    """Captura el nombre y pide el apellido."""
-    context.user_data['nombre'] = update.message.text
-    await update.message.reply_text("Gracias. Ahora, **¿cuáles son tus Apellidos?**")
+async def obtener_nombre(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    nombre_ingresado = update.message.text
+    context.user_data['nombre'] = nombre_ingresado
+    await update.message.reply_text(
+        f"¡Hola, {nombre_ingresado}! Gracias por tu nombre.\n"
+        "Ahora, **¿cuáles son tus Apellidos?**"
+    )
     return REG_APELLIDOS
 
 # --- B. Captura Apellidos ---
-async def obtener_apellidos(update: Update, context: CallbackContext) -> int:
+async def obtener_apellidos(update: Update, ContextTypes.DEFAULT_TYPE) -> int:
     """Captura el apellido y pide la edad."""
     context.user_data['apellidos'] = update.message.text
-    await update.message.reply_text("Perfecto. **¿Cuál es tu Edad?**")
+    await update.message.reply_text(
+        "¡Apellidos guardados! Ahora, dime, **¿Cuál es tu Edad?** "
+        "(Solo ingresa el número)"
+    )
     return REG_EDAD
 
 # --- C. Captura Edad ---
-async def obtener_edad(update: Update, context: CallbackContext) -> int:
+async def obtener_edad(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Captura la edad y pide el peso (con opción de omitir)."""
     try:
         edad = int(update.message.text)
@@ -118,7 +124,7 @@ async def obtener_edad(update: Update, context: CallbackContext) -> int:
         return REG_EDAD
 
 # --- D. Captura Peso (Opcional) ---
-async def obtener_peso(update: Update, context: CallbackContext) -> int:
+async def obtener_peso(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Captura el peso y pide la altura (con opción de omitir)."""
     peso_str = update.message.text.upper().strip()
     
@@ -143,7 +149,7 @@ async def obtener_peso(update: Update, context: CallbackContext) -> int:
     return REG_ALTURA
 
 # --- E. Captura Altura (Opcional) ---
-async def obtener_altura(update: Update, context: CallbackContext) -> int:
+async def obtener_altura(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Captura la altura y pide las alergias."""
     altura_str = update.message.text.upper().strip()
 
