@@ -219,7 +219,7 @@ async def obtener_sexo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         return await validar_datos(update, context) # Pasa directamente a la validación
 
 # --- H. Captura Embarazo (Condicional) ---
-async def obtener_embarazo(update: Update, context: CallbackContext) -> int:
+async def obtener_embarazo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Captura el estado de embarazo y pasa a la validación."""
     embarazo = update.message.text.upper().strip()
 
