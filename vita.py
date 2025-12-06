@@ -43,7 +43,7 @@ logging.basicConfig(
 # 2. MANEJADOR DE COMANDOS /start y Bienvenida
 # ----------------------------------------------------
 
-async def start(update: Update, context: CallbackContext) -> int:
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Inicia la conversación y pide el nombre."""
     user_data = context.user_data
     chat_id = update.effective_chat.id
@@ -64,7 +64,7 @@ async def start(update: Update, context: CallbackContext) -> int:
         "**Comencemos con tu Nombre Completo:**"
     )
     return REG_NOMBRE
-async def comando_consulta(update: Update, context: CallbackContext) -> int:
+async def comando_consulta(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Inicia el flujo de consulta de síntomas."""
     user_data = context.user_data
 
@@ -94,7 +94,7 @@ async def obtener_nombre(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     return REG_APELLIDOS
 
 # --- B. Captura Apellidos ---
-async def obtener_apellidos(update: Update, ContextTypes.DEFAULT_TYPE) -> int:
+async def obtener_apellidos(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Captura el apellido y pide la edad."""
     context.user_data['apellidos'] = update.message.text
     await update.message.reply_text(
@@ -172,7 +172,7 @@ async def obtener_altura(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     return REG_ALERGIAS
 
 # --- F. Captura Alergias ---
-async def obtener_alergias(update: Update, context: CallbackContext) -> int:
+async def obtener_alergias(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Captura las alergias y pide el sexo con un teclado de botones."""
     context.user_data['alergias'] = update.message.text
 
@@ -186,7 +186,7 @@ async def obtener_alergias(update: Update, context: CallbackContext) -> int:
     return REG_SEXO
 
 # --- G. Captura Sexo y Condición para Embarazo ---
-async def obtener_sexo(update: Update, context: CallbackContext) -> int:
+async def obtener_sexo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Captura el sexo y, si es 'Femenino', pregunta por embarazo."""
     sexo = update.message.text.upper().strip()
 
@@ -239,7 +239,7 @@ async def obtener_embarazo(update: Update, context: CallbackContext) -> int:
 # 4. FUNCIÓN DE VALIDACIÓN Y MENSAJE DE ÉXITO (PASO 3, 4, 6)
 # ----------------------------------------------------
 
-async def validar_datos(update: Update, context: CallbackContext) -> int:
+async def validar_datos(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """
     Muestra los datos capturados y pide confirmación (Validación).
     Si se confirma, guarda el estado y da el mensaje de éxito.
@@ -269,7 +269,7 @@ async def validar_datos(update: Update, context: CallbackContext) -> int:
     )
     return REG_VALIDACION
 
-async def confirmar_registro(update: Update, context: CallbackContext) -> int:
+async def confirmar_registro(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Finaliza el registro y da el mensaje de éxito."""
     respuesta = update.message.text.upper().strip()
     
@@ -311,13 +311,13 @@ async def confirmar_registro(update: Update, context: CallbackContext) -> int:
         return REG_VALIDACION
 
 # Función para cancelar el registro en cualquier momento
-async def cancel(update: Update, context: CallbackContext) -> int:
+async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Cancela la conversación iniciada por el usuario."""
     await update.message.reply_text(
         'Registro cancelado. Puedes reiniciarlo en cualquier momento con el comando /start.'
     )
     return ConversationHandler.END
-async def procesar_consulta(update: Update, context: CallbackContext) -> int:
+async def procesar_consulta(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Procesa los síntomas, busca el tratamiento y aplica la advertencia."""
     sintomas = update.message.text
     user_data = context.user_data
@@ -381,7 +381,7 @@ async def procesar_consulta(update: Update, context: CallbackContext) -> int:
     await update.message.reply_text(mensaje, parse_mode='Markdown')
     
     return ConversationHandler.END
-async def comando_ayuda(update: Update, context: CallbackContext) -> int:
+async def comando_ayuda(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Inicia el flujo de ayuda general, activando la búsqueda web."""
     
     # Si el bot puede manejar la búsqueda de forma asíncrona, no necesita ConversationHandler.
@@ -397,7 +397,7 @@ async def comando_ayuda(update: Update, context: CallbackContext) -> int:
     # El bot pasa a un estado donde cualquier mensaje de texto 
     # se interpreta como una pregunta de ayuda general.
     return CONSULTA_PREGUNTA # Reutilizamos el estado para la próxima pregunta de texto.
-async def comando_imc(update: Update, context: CallbackContext) -> int:
+async def comando_imc(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Inicia el cálculo del IMC."""
     user_data = context.user_data
     
@@ -421,7 +421,7 @@ async def comando_imc(update: Update, context: CallbackContext) -> int:
     return await calcular_e_informar_imc(update, context, peso, altura)
 
 # --- Captura Peso para IMC ---
-async def imc_obtener_peso(update: Update, context: CallbackContext) -> int:
+async def imc_obtener_peso(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Captura el peso y pide la altura."""
     try:
         peso = float(update.message.text.replace(',', '.'))
@@ -433,7 +433,7 @@ async def imc_obtener_peso(update: Update, context: CallbackContext) -> int:
         return CMD_IMC_PESO
 
 # --- Captura Altura y Calcula IMC ---
-async def imc_obtener_altura(update: Update, context: CallbackContext) -> int:
+async def imc_obtener_altura(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Captura la altura y realiza el cálculo."""
     try:
         altura = float(update.message.text.replace(',', '.'))
@@ -448,7 +448,7 @@ async def imc_obtener_altura(update: Update, context: CallbackContext) -> int:
         return CMD_IMC_ALTURA
 
 # --- Función de Cálculo y Mensaje ---
-async def calcular_e_informar_imc(update: Update, context: CallbackContext, peso: float, altura: float) -> int:
+async def calcular_e_informar_imc(update: Update, context: ContextTypes.DEFAULT_TYPE, peso: float, altura: float) -> int:
     """Calcula y reporta el IMC."""
     try:
         # Fórmula: IMC = Peso / (Altura * Altura)
@@ -491,7 +491,7 @@ async def comando_fur(update: Update, context: CallbackContext) -> int:
     return CMD_FUR_REGULARIDAD
 
 # --- Captura Regularidad ---
-async def fur_obtener_regularidad(update: Update, context: CallbackContext) -> int:
+async def fur_obtener_regularidad(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Captura la regularidad y pide la fecha."""
     regularidad = update.message.text.upper().strip()
     if regularidad not in ('REGULAR', 'IRREGULAR'):
@@ -507,7 +507,7 @@ async def fur_obtener_regularidad(update: Update, context: CallbackContext) -> i
     return CMD_FUR_FECHA
 
 # --- Captura Fecha y Calcula ---
-async def fur_calcular(update: Update, context: CallbackContext) -> int:
+async def fur_calcular(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Realiza el cálculo de semanas y FPP."""
     from datetime import datetime, timedelta
     fur_str = update.message.text
@@ -542,7 +542,7 @@ async def fur_calcular(update: Update, context: CallbackContext) -> int:
         return CMD_FUR_FECHA
 
     return ConversationHandler.END
-async def comando_care(update: Update, context: CallbackContext):
+async def comando_care(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Proporciona información sobre cuidado facial mediante búsqueda web."""
     query = "rutina de cuidado facial piel limpia y definida"
     
@@ -558,13 +558,13 @@ async def comando_care(update: Update, context: CallbackContext):
         )
     except Exception:
         await update.message.reply_text("Lo siento, no pude acceder a la web en este momento. Inténtalo de nuevo más tarde.")
-async def comando_fitnest(update: Update, context: CallbackContext) -> int:
+async def comando_fitnest(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Inicia la pregunta sobre la disciplina deportiva."""
     await update.message.reply_text("🏋️‍♀️ **¿Qué deportes, disciplina o pasatiempo practicas?**\n"
                                     "Esto me ayudará a buscar la dieta y ejercicios más adecuados para ti.")
     return CMD_FITNEST_DISCIPLINA
 
-async def fitnest_buscar(update: Update, context: CallbackContext) -> int:
+async def fitnest_buscar(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Busca dietas y ejercicios para la disciplina proporcionada."""
     disciplina = update.message.text
     query = f"mejores dietas y ejercicios para {disciplina}"
@@ -582,7 +582,7 @@ async def fitnest_buscar(update: Update, context: CallbackContext) -> int:
         await update.message.reply_text("Lo siento, no pude obtener los resultados de la búsqueda.")
         
     return ConversationHandler.END
-async def comando_maps(update: Update, context: CallbackContext):
+async def comando_maps(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Pide la ubicación para buscar farmacias y hospitales."""
     await update.message.reply_text(
         "📍 Para encontrar hospitales y farmacias cercanas, por favor **comparte tu ubicación** actual."
@@ -591,7 +591,7 @@ async def comando_maps(update: Update, context: CallbackContext):
     # NOTA: La lógica para PROCESAR la ubicación (MessageHandler(filters.LOCATION))
     # y usar un API de mapas debe implementarse aparte.
 
-async def procesar_ubicacion(update: Update, context: CallbackContext):
+async def procesar_ubicacion(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """(Función conceptual) Procesa la ubicación y busca puntos cercanos."""
     if update.message.location:
         lat = update.message.location.latitude
@@ -612,7 +612,7 @@ async def procesar_ubicacion(update: Update, context: CallbackContext):
             )
         except Exception:
             await update.message.reply_text("No se pudieron obtener resultados de mapas en este momento.")
-async def comando_perfil(update: Update, context: CallbackContext):
+async def comando_perfil(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Muestra los datos del perfil y ofrece opción de modificación."""
     user_data = context.user_data
     
@@ -637,7 +637,7 @@ async def comando_perfil(update: Update, context: CallbackContext):
         reply_markup=ReplyKeyboardMarkup([['Modificar Datos']], one_time_keyboard=True, resize_keyboard=True)
     )
     # NOTA: Al pulsar 'Modificar Datos', se debe iniciar el ConversationHandler de REGISTRO (o uno nuevo de edición).
-async def comando_salud(update: Update, context: CallbackContext):
+async def comando_salud(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Muestra el mensaje de venta y enlaces de ayuda."""
     
     mensaje = (
