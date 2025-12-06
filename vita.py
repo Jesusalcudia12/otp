@@ -43,7 +43,7 @@ logging.basicConfig(
 # 2. MANEJADOR DE COMANDOS /start y Bienvenida
 # ----------------------------------------------------
 
-aasync def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
    
     user_data = context.user_data
     
