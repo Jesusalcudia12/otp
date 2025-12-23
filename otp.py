@@ -10,7 +10,7 @@ TWILIO_SID = 'AC8c778ba9b59bc0adb2048fcef85000d6'
 TWILIO_TOKEN = 'c5cc57bfca3c961df65ff37bb5d2dffe'
 TWILIO_NUMBER = '+1765663617'
 # Tu URL de Ngrok o Cloudflared (Termux)
-WEBHOOK_URL = 'https://9e17363a82e7.ngrok-free.app/otp-recibido' 
+WEBHOOK_URL = 'https://7c8667387d58.ngrok-free.app/otp-recibido' 
 
 client = Client(TWILIO_SID, TWILIO_TOKEN)
 
