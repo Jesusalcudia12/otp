@@ -4,8 +4,8 @@ import requests
 app = Flask(__name__)
 
 # --- CONFIGURACIÓN ---
-TELEGRAM_TOKEN = 'TU_TELEGRAM_TOKEN'
-TU_CHAT_ID = 'TU_ID_DE_USUARIO' 
+TELEGRAM_TOKEN = '8555237773:AAHZiG_nqBzGyWshGsXBzCEKnOKmOjxoHLw'
+TU_CHAT_ID = '6280594821' 
 
 @app.route("/otp-recibido", methods=['POST'])
 def otp_recibido():
