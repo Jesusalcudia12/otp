@@ -5,10 +5,10 @@ from twilio.rest import Client
 
 # --- CONFIGURACIÓN ---
 # Reemplaza con tus credenciales reales
-TELEGRAM_TOKEN = 'TU_TELEGRAM_TOKEN'
-TWILIO_SID = 'TU_TWILIO_SID'
-TWILIO_TOKEN = 'TU_TWILIO_TOKEN'
-TWILIO_NUMBER = '+1234567890'
+TELEGRAM_TOKEN = '8555237773:AAHZiG_nqBzGyWshGsXBzCEKnOKmOjxoHLw'
+TWILIO_SID = 'AC8c778ba9b59bc0adb2048fcef85000d6'
+TWILIO_TOKEN = 'c5cc57bfca3c961df65ff37bb5d2dffe'
+TWILIO_NUMBER = '+1765663617'
 # Tu URL de Ngrok o Cloudflared (Termux)
 WEBHOOK_URL = 'https://tu-servidor.com/otp-recibido' 
 
