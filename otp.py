@@ -7,8 +7,8 @@ from twilio.rest import Client
 # Reemplaza con tus credenciales reales
 TELEGRAM_TOKEN = '8555237773:AAHZiG_nqBzGyWshGsXBzCEKnOKmOjxoHLw'
 TWILIO_SID = 'AC28c3778e4e9e8a5ed052788c8d791a7b'
-TWILIO_TOKEN = '35d095d1e7f409a4478f738d0ad29313'
-TWILIO_NUMBER = '+1765663617'
+TWILIO_TOKEN = '46fa07ac3ba87118c2447abeed7bd6e8'
+TWILIO_NUMBER = '+19565313089'
 # Tu URL de Ngrok o Cloudflared (Termux)
 WEBHOOK_URL = 'https://7c8667387d58.ngrok-free.app/otp-recibido' 
 
