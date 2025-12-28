@@ -4,7 +4,8 @@ import logging
 import threading
 import requests
 import time
-from datetime import datetime
+import json
+from datetime import datetime, timedelta
 from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 from signalwire.rest import Client as signalwire_client
@@ -20,7 +21,57 @@ try:
     from utils import format_otp_message
 except ImportError:
     pass
+# --- SISTEMA DE LICENCIAS ---
+def load_keys():
+    try:
+        with open('keys.json', 'r') as f:
+            return json.load(f)
+    except:
+        return {}
 
+def save_keys(keys):
+    with open('keys.json', 'w') as f:
+        json.dump(keys, f, indent=4)
+
+def check_license(user_id):
+    keys = load_keys()
+    user_id = str(user_id)
+    if user_id in keys:
+        expiry = datetime.fromisoformat(keys[user_id])
+        if expiry > datetime.now():
+            return True, expiry
+    return False, None
+
+# --- COMANDOS PARA TI (ADMIN) ---
+async def generate_key(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Comando: /genkey [user_id] [dias]"""
+    if str(update.message.from_user.id) != os.getenv('ADMIN_ID'):
+        return
+    
+    try:
+        user_to_auth = context.args[0]
+        days = int(context.args[1])
+        expiry_date = (datetime.now() + timedelta(days=days)).isoformat()
+        
+        keys = load_keys()
+        keys[user_to_auth] = expiry_date
+        save_keys(keys)
+        
+        await update.message.reply_text(f"✅ Licencia generada para {user_to_auth}\n📅 Expira: {expiry_date}")
+    except:
+        await update.message.reply_text("❌ Uso: /genkey [user_id] [dias]")
+
+# --- PROTECCIÓN DE COMANDOS ---
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.message.from_user.id
+    is_valid, expiry = check_license(user_id)
+    
+    if not is_valid:
+        await update.message.reply_text(f"🚫 <b>Acceso Denegado</b>\nTu ID: <code>{user_id}</code>\nContacta al admin para comprar una licencia.", parse_mode="HTML")
+        return
+
+    # Si es válido, mostrar el menú de bancos...
+    # (Aquí va tu código de InlineKeyboardMarkup de los bancos)
 # Cargar configuración
 load_dotenv()
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
