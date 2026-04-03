@@ -1,0 +1,11 @@
+modules = ["bash", "bun-1.1", "go-1.21", "python-3.12"]
+
+[nix]
+channel = "stable-24_05"
+
+# Este es el cambio clave:
+run = "python main.py"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
